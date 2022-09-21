@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from "react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+
+class App extends Component {
+  state = {
+    selectedTab: "login",
+  };
+
+  setSelectedTab = (tab) => this.setState({ selectedTab: tab });
+
+  render() {
+    const { selectedTab } = this.state;
+    return (
+      <div className="App container mt-2">
+        <div className="d-flex justify-content-center">
+          <button
+            onClick={() => this.setSelectedTab("login")}
+            className={`btn btn-default ${
+              selectedTab === "login" ? "btn-success" : ""
+            }`}
+          >
+            Login
+          </button>
+          <button
+            onClick={() => this.setSelectedTab("register")}
+            className={`btn btn-default ${
+              selectedTab === "register" ? "btn-success" : ""
+            }`}
+          >
+            Register
+          </button>
+        </div>
+
+        <div className="row">
+          {selectedTab === "login" && <LoginForm />}
+          {selectedTab === "register" && <RegisterForm />}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
