@@ -36,8 +36,19 @@ class App extends Component {
         </div>
 
         <div className="row">
-          {selectedTab === "login" && <LoginForm />}
-          {selectedTab === "register" && <RegisterForm />}
+          {selectedTab === "login" && (
+            <LoginForm initialState={{ email: "", password: "" }} color="red" />
+          )}
+          {selectedTab === "register" && (
+            <RegisterForm
+              initialState={{
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: "",
+              }}
+            />
+          )}
         </div>
       </div>
     );

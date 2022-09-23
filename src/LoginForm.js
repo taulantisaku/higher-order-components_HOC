@@ -1,38 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
+import withForm from "./components/withForm";
 
-export default class LoginForm extends Component {
-  state = {
-    formData: {
-      email: "",
-      password: "",
-    },
+ function LoginForm(props) {
+  
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log("handle submit", props.formData);
   };
 
-  handleOnChange = (e) => {
-    console.log(e.target.name);
-    this.setState({
-      formData: {
-        ...this.state.formData,
-        [e.target.name]: e.target.value,
-      },
-    });
-  };
-
-  handleOnSubmit = (e) => {};
-
-  render() {
-    const { formData } = this.state;
+    console.log("Login form props =>", props)
+    const { formData, handleOnChange } = props;
     return (
       <div className="col-md-4 offset-md-4 mt-2">
         <h1>Login Form</h1>
-        <form>
+        <form onSubmit={handleOnSubmit}>
           <div className="form-group mb-2 ">
             <input
               type="text"
               name="email"
               value={formData.email}
               placeholder="Email"
-              onChange={this.handleOnChange}
+              onChange={handleOnChange}
             />
           </div>
           <div className="form-group ">
@@ -41,7 +29,7 @@ export default class LoginForm extends Component {
               name="password"
               value={formData.password}
               placeholder="Password"
-              onChange={this.handleOnChange}
+              onChange={handleOnChange}
             />
           </div>
           <div className="form-group mt-3">
@@ -52,7 +40,7 @@ export default class LoginForm extends Component {
         </form>
       </div>
     );
-  }
+
 }
 
-
+export default withForm(LoginForm)
